@@ -5,30 +5,20 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "roc", "roc\roc.vcxproj", "{727FFA74-7928-4AA3-A4AE-151D1841C573}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "live555", "os\live555\live555.vcxproj", "{8ED53CEC-C17C-42A6-9EE5-B109F51E4CB4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "live555", "live555\live555.vcxproj", "{8ED53CEC-C17C-42A6-9EE5-B109F51E4CB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
-		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{727FFA74-7928-4AA3-A4AE-151D1841C573}.Debug|x64.ActiveCfg = Debug|x64
-		{727FFA74-7928-4AA3-A4AE-151D1841C573}.Debug|x64.Build.0 = Debug|x64
 		{727FFA74-7928-4AA3-A4AE-151D1841C573}.Debug|x86.ActiveCfg = Debug|Win32
 		{727FFA74-7928-4AA3-A4AE-151D1841C573}.Debug|x86.Build.0 = Debug|Win32
-		{727FFA74-7928-4AA3-A4AE-151D1841C573}.Release|x64.ActiveCfg = Release|x64
-		{727FFA74-7928-4AA3-A4AE-151D1841C573}.Release|x64.Build.0 = Release|x64
 		{727FFA74-7928-4AA3-A4AE-151D1841C573}.Release|x86.ActiveCfg = Release|Win32
 		{727FFA74-7928-4AA3-A4AE-151D1841C573}.Release|x86.Build.0 = Release|Win32
-		{8ED53CEC-C17C-42A6-9EE5-B109F51E4CB4}.Debug|x64.ActiveCfg = Debug|x64
-		{8ED53CEC-C17C-42A6-9EE5-B109F51E4CB4}.Debug|x64.Build.0 = Debug|x64
 		{8ED53CEC-C17C-42A6-9EE5-B109F51E4CB4}.Debug|x86.ActiveCfg = Debug|Win32
 		{8ED53CEC-C17C-42A6-9EE5-B109F51E4CB4}.Debug|x86.Build.0 = Debug|Win32
-		{8ED53CEC-C17C-42A6-9EE5-B109F51E4CB4}.Release|x64.ActiveCfg = Release|x64
-		{8ED53CEC-C17C-42A6-9EE5-B109F51E4CB4}.Release|x64.Build.0 = Release|x64
 		{8ED53CEC-C17C-42A6-9EE5-B109F51E4CB4}.Release|x86.ActiveCfg = Release|Win32
 		{8ED53CEC-C17C-42A6-9EE5-B109F51E4CB4}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
