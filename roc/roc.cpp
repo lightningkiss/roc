@@ -2,12 +2,14 @@
 #include <sys/wait.h>
 #endif
 #include <time.h>
+#include "log.h"
 #include "liveMedia.hh"
 #include "BasicUsageEnvironment.hh"
 #include "server.h"
 
 static void run()
 {
+	LogInit();
 	OutPacketBuffer::maxSize = 1024 * 1024; // bytes
 
 	TaskScheduler* scheduler = BasicTaskScheduler::createNew();

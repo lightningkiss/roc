@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="3rd">
+      <UniqueIdentifier>{27e1a356-651b-43d4-8887-be4c2bb1f498}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\spdlog">
+      <UniqueIdentifier>{baa49163-f187-403c-a95c-f3422cb0da39}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="roc.cpp">
@@ -24,12 +30,108 @@
     <ClCompile Include="server.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="log.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="session.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="server.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\async_logger.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\common.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\formatter.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\logger.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\spdlog.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\tweakme.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\details\async_log_helper.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\details\async_logger_impl.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\details\file_helper.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\details\log_msg.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\details\logger_impl.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\details\mpmc_bounded_q.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\details\null_mutex.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\details\os.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\details\pattern_formatter_impl.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\details\registry.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\details\spdlog_impl.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\sinks\android_sink.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\sinks\ansicolor_sink.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\sinks\base_sink.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\sinks\dist_sink.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\sinks\file_sinks.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\sinks\msvc_sink.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\sinks\null_sink.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\sinks\ostream_sink.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\sinks\sink.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\sinks\stdout_sinks.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\sinks\syslog_sink.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\fmt\fmt.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rd\spdlog\fmt\ostr.h">
+      <Filter>3rd\spdlog</Filter>
+    </ClInclude>
+    <ClInclude Include="log.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

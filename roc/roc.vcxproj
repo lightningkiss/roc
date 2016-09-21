@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\live555\BasicUsageEnvironment\include;..\live555\groupsock\include;..\live555\liveMedia\include;..\live555\UsageEnvironment\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\live555\BasicUsageEnvironment\include;..\live555\groupsock\include;..\live555\liveMedia\include;..\live555\UsageEnvironment\include;..\3rd;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,11 +150,43 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="log.cpp" />
     <ClCompile Include="session.cpp" />
     <ClCompile Include="server.cpp" />
     <ClCompile Include="roc.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\3rd\spdlog\async_logger.h" />
+    <ClInclude Include="..\3rd\spdlog\common.h" />
+    <ClInclude Include="..\3rd\spdlog\details\async_logger_impl.h" />
+    <ClInclude Include="..\3rd\spdlog\details\async_log_helper.h" />
+    <ClInclude Include="..\3rd\spdlog\details\file_helper.h" />
+    <ClInclude Include="..\3rd\spdlog\details\logger_impl.h" />
+    <ClInclude Include="..\3rd\spdlog\details\log_msg.h" />
+    <ClInclude Include="..\3rd\spdlog\details\mpmc_bounded_q.h" />
+    <ClInclude Include="..\3rd\spdlog\details\null_mutex.h" />
+    <ClInclude Include="..\3rd\spdlog\details\os.h" />
+    <ClInclude Include="..\3rd\spdlog\details\pattern_formatter_impl.h" />
+    <ClInclude Include="..\3rd\spdlog\details\registry.h" />
+    <ClInclude Include="..\3rd\spdlog\details\spdlog_impl.h" />
+    <ClInclude Include="..\3rd\spdlog\fmt\fmt.h" />
+    <ClInclude Include="..\3rd\spdlog\fmt\ostr.h" />
+    <ClInclude Include="..\3rd\spdlog\formatter.h" />
+    <ClInclude Include="..\3rd\spdlog\logger.h" />
+    <ClInclude Include="..\3rd\spdlog\sinks\android_sink.h" />
+    <ClInclude Include="..\3rd\spdlog\sinks\ansicolor_sink.h" />
+    <ClInclude Include="..\3rd\spdlog\sinks\base_sink.h" />
+    <ClInclude Include="..\3rd\spdlog\sinks\dist_sink.h" />
+    <ClInclude Include="..\3rd\spdlog\sinks\file_sinks.h" />
+    <ClInclude Include="..\3rd\spdlog\sinks\msvc_sink.h" />
+    <ClInclude Include="..\3rd\spdlog\sinks\null_sink.h" />
+    <ClInclude Include="..\3rd\spdlog\sinks\ostream_sink.h" />
+    <ClInclude Include="..\3rd\spdlog\sinks\sink.h" />
+    <ClInclude Include="..\3rd\spdlog\sinks\stdout_sinks.h" />
+    <ClInclude Include="..\3rd\spdlog\sinks\syslog_sink.h" />
+    <ClInclude Include="..\3rd\spdlog\spdlog.h" />
+    <ClInclude Include="..\3rd\spdlog\tweakme.h" />
+    <ClInclude Include="log.h" />
     <ClInclude Include="session.h" />
     <ClInclude Include="server.h" />
   </ItemGroup>
