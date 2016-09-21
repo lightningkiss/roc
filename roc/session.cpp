@@ -1,62 +1,55 @@
 #include "session.h"
 
-////////// ProxyServerMediaSession implementation //////////
-
-ProxyRTSPClient* CreateNewLiveRTSPClientFunc(ProxyServerMediaSession& ourServerMediaSession,
-	char const* rtspURL, char const* username, char const* password,
-	portNumBits tunnelOverHTTPPortNum, int verbosityLevel, int socketNumToServer) {
-	LiveRTSPClient* rc = new LiveRTSPClient(ourServerMediaSession, rtspURL, username, password,
+LiveServerMediaSession* LiveServerMediaSession::createNew(UsageEnvironment& env, LiveRTSPServer* ourRTSPServer,
+		char const* inputStreamURL, char const* streamName, char const* username, char const* password,
+		portNumBits tunnelOverHTTPPortNum, int verbosityLevel, int socketNumToServer) 
+{
+	return new LiveServerMediaSession(env, ourRTSPServer, inputStreamURL, streamName, username, password,
 		tunnelOverHTTPPortNum, verbosityLevel, socketNumToServer);
-	return (ProxyRTSPClient*)rc;
 }
 
-LiveServerMediaSession* LiveServerMediaSession
-::createNew(UsageEnvironment& env, GenericMediaServer* ourMediaServer,
-	char const* inputStreamURL, char const* streamName,
-	char const* username, char const* password,
-	portNumBits tunnelOverHTTPPortNum, int verbosityLevel, int socketNumToServer,
-	MediaTranscodingTable* transcodingTable) {
-	return new LiveServerMediaSession(env, ourMediaServer, inputStreamURL, streamName, username, password,
-		tunnelOverHTTPPortNum, verbosityLevel, socketNumToServer,
-		transcodingTable);
-}
-
-LiveServerMediaSession::LiveServerMediaSession(UsageEnvironment& env, GenericMediaServer* ourMediaServer,
-	char const* inputStreamURL, char const* streamName,	char const* username, char const* password,
-	portNumBits tunnelOverHTTPPortNum, int verbosityLevel, int socketNumToServer,
-	MediaTranscodingTable* transcodingTable, portNumBits initialPortNum, Boolean multiplexRTCPWithRTP)
-	: ProxyServerMediaSession(env, ourMediaServer, inputStreamURL, streamName, username, password, 
-		tunnelOverHTTPPortNum, verbosityLevel, socketNumToServer, transcodingTable, CreateNewLiveRTSPClientFunc) {
-}
-
-LiveServerMediaSession::~LiveServerMediaSession() {
+LiveServerMediaSession::LiveServerMediaSession(UsageEnvironment& env, LiveRTSPServer* ourRTSPServer, char const* inputStreamURL,
+		char const* streamName, char const* username, char const* password, portNumBits tunnelOverHTTPPortNum, 
+		int verbosityLevel, int socketNumToServer)
+		: ProxyServerMediaSession(env, ourRTSPServer, inputStreamURL, streamName, username, password, tunnelOverHTTPPortNum,
+		verbosityLevel, socketNumToServer, NULL), fProxyRTSPServer(ourRTSPServer)
+{
 
 }
 
-////////// "ProxyRTSPClient" implementation /////////
-
-LiveRTSPClient::LiveRTSPClient(ProxyServerMediaSession& ourServerMediaSession, char const* rtspURL,
-	char const* username, char const* password, portNumBits tunnelOverHTTPPortNum, int verbosityLevel, int socketNumToServer)
-	: ProxyRTSPClient(ourServerMediaSession, rtspURL, username, password, tunnelOverHTTPPortNum, verbosityLevel, socketNumToServer) {
+LiveServerMediaSession::~LiveServerMediaSession()
+{
 
 }
 
-LiveRTSPClient::~LiveRTSPClient() {
+void LiveServerMediaSession::continueAfterDESCRIBE(char const* sdpDescription)
+{
+	m_status = (sdpDescription == NULL) ? RTSP_DISCONNECT : RTSP_CONNECTOK;
+	ProxyServerMediaSession::continueAfterDESCRIBE(sdpDescription);
 
+	for (size_t i = 0; i < m_clients.size(); i++) {
+		LiveRTSPServer::LiveRTSPClientConnection* client = m_clients[i];
+		client->SendDescribeRespone(this);
+	}
 }
 
-void LiveRTSPClient::continueAfterDESCRIBE(char const* sdpDescription) {
-	
+void LiveServerMediaSession::DeleteClientConnection(LiveRTSPServer::LiveRTSPClientConnection* client) {
+	std::vector<LiveRTSPServer::LiveRTSPClientConnection*>::iterator it = m_clients.begin();
+	for (; it != m_clients.end(); it++) {
+		if (*it == client) {
+			m_clients.erase(it);
+			break;
+		}
+	}
 }
 
-void LiveRTSPClient::continueAfterLivenessCommand(int resultCode, Boolean serverSupportsGetParameter) {
-	
-}
+void LiveServerMediaSession::AddClientConnection(LiveRTSPServer::LiveRTSPClientConnection* client) {
+	std::vector<LiveRTSPServer::LiveRTSPClientConnection*>::iterator it = m_clients.begin();
+	for (; it != m_clients.end(); it++) {
+		if (*it == client) {
+			return;
+		}
+	}
 
-void LiveRTSPClient::continueAfterSETUP(int resultCode) {
-
-}
-
-void LiveRTSPClient::continueAfterPLAY(int resultCode) {
-
+	m_clients.push_back(client);
 }

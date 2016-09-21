@@ -18,18 +18,18 @@
     <ClCompile Include="roc.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="server.cpp">
+    <ClCompile Include="session.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="session.cpp">
+    <ClCompile Include="server.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="server.h">
+    <ClInclude Include="session.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="session.h">
+    <ClInclude Include="server.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

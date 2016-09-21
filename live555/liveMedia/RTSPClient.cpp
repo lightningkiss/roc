@@ -2005,16 +2005,23 @@ char const* HandlerServerForREGISTERCommand::allowedCommandNames() {
   return "OPTIONS, REGISTER";
 }
 
-Boolean HandlerServerForREGISTERCommand::weImplementREGISTER(char const* proxyURLSuffix, char*& responseStr) {
+Boolean HandlerServerForREGISTERCommand
+::weImplementREGISTER(char const* cmd/*"REGISTER" or "DEREGISTER"*/,
+		      char const* /*proxyURLSuffix*/, char*& responseStr) {
   responseStr = NULL;
-  return True;
+  // By default, we implement only "REGISTER"; not "DEREGISTER".  Subclass to implement "DEREGISTER"
+  return strcmp(cmd, "REGISTER") == 0;
 }
 
-void HandlerServerForREGISTERCommand::implementCmd_REGISTER(char const* url, char const* urlSuffix, int socketToRemoteServer,
-							    Boolean deliverViaTCP, char const* /*proxyURLSuffix*/) {
-  // Create a new "RTSPClient" object, and call our 'creation function' with it:
-  RTSPClient* newRTSPClient = createNewRTSPClient(url, fVerbosityLevel, fApplicationName, socketToRemoteServer);
+void HandlerServerForREGISTERCommand
+::implementCmd_REGISTER(char const* cmd/*"REGISTER" or "DEREGISTER"*/,
+			char const* url, char const* urlSuffix, int socketToRemoteServer,
+			Boolean deliverViaTCP, char const* /*proxyURLSuffix*/) {
+  if (strcmp(cmd, "REGISTER") == 0) { // By default, we don't implement "DEREGISTER"
+    // Create a new "RTSPClient" object, and call our 'creation function' with it:
+    RTSPClient* newRTSPClient = createNewRTSPClient(url, fVerbosityLevel, fApplicationName, socketToRemoteServer);
 
-  if (fCreationFunc != NULL) (*fCreationFunc)(newRTSPClient, deliverViaTCP);
+    if (fCreationFunc != NULL) (*fCreationFunc)(newRTSPClient, deliverViaTCP);
+  }
 }
 #endif

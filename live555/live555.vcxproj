@@ -482,6 +482,7 @@
     <ClCompile Include="liveMedia\RTSPCommon.cpp" />
     <ClCompile Include="liveMedia\RTSPRegisterSender.cpp" />
     <ClCompile Include="liveMedia\RTSPServer.cpp" />
+    <ClCompile Include="liveMedia\RTSPServerRegister.cpp" />
     <ClCompile Include="liveMedia\RTSPServerSupportingHTTPStreaming.cpp" />
     <ClCompile Include="liveMedia\ServerMediaSession.cpp" />
     <ClCompile Include="liveMedia\SimpleRTPSink.cpp" />

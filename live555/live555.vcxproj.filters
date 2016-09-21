@@ -1148,5 +1148,8 @@
     <ClCompile Include="UsageEnvironment\UsageEnvironment.cpp">
       <Filter>源文件\UsageEnvironment</Filter>
     </ClCompile>
+    <ClCompile Include="liveMedia\RTSPServerRegister.cpp">
+      <Filter>源文件\liveMedia</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

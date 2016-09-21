@@ -144,7 +144,7 @@ protected:
   virtual Groupsock* createGroupsock(struct in_addr const& addr, Port port);
   virtual RTCPInstance* createRTCP(Groupsock* RTCPgs, unsigned totSessionBW, /* in kbps */
 				   unsigned char const* cname, RTPSink* sink);
-
+  virtual void continueAfterDESCRIBE(char const* sdpDescription);
   virtual Boolean allowProxyingForSubsession(MediaSubsession const& mss);
   // By default, this function always returns True.  However, a subclass may redefine this
   // if it wishes to restrict which subsessions of a stream get proxied - e.g., if it wishes
@@ -158,7 +158,7 @@ protected:
 private:
   friend class ProxyRTSPClient;
   friend class ProxyServerMediaSubsession;
-  void continueAfterDESCRIBE(char const* sdpDescription);
+  
   void resetDESCRIBEState(); // undoes what was done by "contineAfterDESCRIBE()"
 
 private:

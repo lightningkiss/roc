@@ -376,9 +376,12 @@ protected:
       // of "RTSPClient" instead, then subclass this class, and redefine this virtual function.
 
 protected: // redefined virtual functions
-  virtual char const* allowedCommandNames(); // we support "OPTIONS" and "REGISTER" only
-  virtual Boolean weImplementREGISTER(char const* proxyURLSuffix, char*& responseStr); // redefined to return True
-  virtual void implementCmd_REGISTER(char const* url, char const* urlSuffix, int socketToRemoteServer,
+  virtual char const* allowedCommandNames(); // "OPTIONS", "REGISTER", and (perhaps) "DEREGISTER" only
+  virtual Boolean weImplementREGISTER(char const* cmd/*"REGISTER" or "DEREGISTER"*/,
+				      char const* proxyURLSuffix, char*& responseStr);
+      // redefined to return True (for cmd=="REGISTER")
+  virtual void implementCmd_REGISTER(char const* cmd/*"REGISTER" or "DEREGISTER"*/,
+				     char const* url, char const* urlSuffix, int socketToRemoteServer,
 				     Boolean deliverViaTCP, char const* proxyURLSuffix);
 
 private:

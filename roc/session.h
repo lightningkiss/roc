@@ -1,56 +1,45 @@
-#ifndef _LIVE_SERVER_SESSION_H__
-#define _LIVE_SERVER_SESSION_H__
+#ifndef _CLIENT_H__
+#define _CLIENT_H__
 
-#include "liveMedia.hh"
+#include "ProxyServerMediaSession.hh"
+#include "server.h"
 
-class LiveRTSPClient : public ProxyRTSPClient {
-public:
-	LiveRTSPClient(class ProxyServerMediaSession& ourServerMediaSession, char const* rtspURL,
-		char const* username, char const* password,
-		portNumBits tunnelOverHTTPPortNum, int verbosityLevel, int socketNumToServer);
-	virtual ~LiveRTSPClient();
-
-	void continueAfterDESCRIBE(char const* sdpDescription);
-	void continueAfterLivenessCommand(int resultCode, Boolean serverSupportsGetParameter);
-	void continueAfterSETUP(int resultCode);
-	void continueAfterPLAY(int resultCode);
-};
-
-ProxyRTSPClient*
-CreateNewLiveRTSPClientFunc(ProxyServerMediaSession& ourServerMediaSession,
-	char const* rtspURL,
-	char const* username, char const* password,
-	portNumBits tunnelOverHTTPPortNum, int verbosityLevel,
-	int socketNumToServer);
+typedef enum {
+	RTSP_CONNECTING,
+	RTSP_CONNECTOK,
+	RTSP_DISCONNECT
+} RTSP_CLIENT_STATUS;
 
 class LiveServerMediaSession : public ProxyServerMediaSession {
 public:
 	static LiveServerMediaSession* createNew(UsageEnvironment& env,
-		GenericMediaServer* ourMediaServer, // Note: We can be used by just one server
+		LiveRTSPServer* ourRTSPServer, // Note: We can be used by just one "RTSPServer"
 		char const* inputStreamURL, // the "rtsp://" URL of the stream we'll be proxying
 		char const* streamName = NULL,
 		char const* username = NULL, char const* password = NULL,
 		portNumBits tunnelOverHTTPPortNum = 0,
 		// for streaming the *proxied* (i.e., back-end) stream
 		int verbosityLevel = 0,
-		int socketNumToServer = -1,
-		MediaTranscodingTable* transcodingTable = NULL);
-	// Hack: "tunnelOverHTTPPortNum" == 0xFFFF (i.e., all-ones) means: Stream RTP/RTCP-over-TCP, but *not* using HTTP
-	// "verbosityLevel" == 1 means display basic proxy setup info; "verbosityLevel" == 2 means display RTSP client protocol also.
-	// If "socketNumToServer" is >= 0, then it is the socket number of an already-existing TCP connection to the server.
-	//      (In this case, "inputStreamURL" must point to the socket's endpoint, so that it can be accessed via the socket.)
+		int socketNumToServer = -1);
 
 	virtual ~LiveServerMediaSession();
+	virtual void continueAfterDESCRIBE(char const* sdpDescription);
+	RTSP_CLIENT_STATUS Status() { return m_status; }
+
+	void DeleteClientConnection(LiveRTSPServer::LiveRTSPClientConnection* client);
+	void AddClientConnection(LiveRTSPServer::LiveRTSPClientConnection* client);
 
 protected:
-	LiveServerMediaSession(UsageEnvironment& env, GenericMediaServer* ourMediaServer,
+	LiveServerMediaSession(UsageEnvironment& env, LiveRTSPServer* ourRTSPServer,
 		char const* inputStreamURL, char const* streamName,
 		char const* username, char const* password,
 		portNumBits tunnelOverHTTPPortNum, int verbosityLevel,
-		int socketNumToServer,
-		MediaTranscodingTable* transcodingTable,
-		portNumBits initialPortNum = 6970,
-		Boolean multiplexRTCPWithRTP = False);
+		int socketNumToServer);
+
+private:
+	LiveRTSPServer* fProxyRTSPServer;
+	RTSP_CLIENT_STATUS m_status;
+	std::vector<LiveRTSPServer::LiveRTSPClientConnection*> m_clients;
 };
 
-#endif //_LIVE_SERVER_SESSION_H__
+#endif //_CLIENT_H__

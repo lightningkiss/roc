@@ -110,12 +110,12 @@ ProxyServerMediaSession
     fInitialPortNum(initialPortNum), fMultiplexRTCPWithRTP(multiplexRTCPWithRTP) {
   // Open a RTSP connection to the input stream, and send a "DESCRIBE" command.
   // We'll use the SDP description in the response to set ourselves up.
-  /*fProxyRTSPClient
+  fProxyRTSPClient
     = (*fCreateNewProxyRTSPClientFunc)(*this, inputStreamURL, username, password,
 				       tunnelOverHTTPPortNum,
 				       verbosityLevel > 0 ? verbosityLevel-1 : verbosityLevel,
 				       socketNumToServer);
-  ProxyRTSPClient::sendDESCRIBE(fProxyRTSPClient);*/
+  ProxyRTSPClient::sendDESCRIBE(fProxyRTSPClient);
 }
 
 ProxyServerMediaSession::~ProxyServerMediaSession() {
